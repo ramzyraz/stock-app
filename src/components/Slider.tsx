@@ -37,26 +37,26 @@ const Slider = () => {
       <div>
       {
         data && data?.marketSummaryResponse?.result.map((item: StockAttributesTypes, idx: number) => {
-          return item.regularMarketChange.raw > 0 ?
+          return item?.regularMarketChange?.raw > 0 ?
           (
             <span className='slider-market-raw' key={idx}>
-              <span className='slider-name'>{ item.shortName }</span>  
+              <span className='slider-name'>{ item?.shortName }</span>  
                   {" "}
                   {item.regularMarketPrice.fmt}
-              <span style={{ color: "green" }}>{" "} +{item.regularMarketChange.fmt} {" "} (+{item.regularMarketChangePercent.fmt})</span>
+              <span style={{ color: "green" }}>{" "} +{item?.regularMarketChange?.fmt} {" "} (+{item?.regularMarketChangePercent?.fmt})</span>
             </span>
           ) :
           (
             <span className='slider-market-raw' key={idx}>
-              <span className='slider-name'>{ item.shortName }</span>  
+              <span className='slider-name'>{ item?.shortName }</span>  
                   {" "}
                   {item.regularMarketPrice.fmt}
-              <span style={{ color: "red" }}>{" "} {item.regularMarketChange.fmt} {" "} ({item.regularMarketChangePercent.fmt})</span>
+              <span style={{ color: "red" }}>{" "} {item?.regularMarketChange?.fmt} {" "} ({item?.regularMarketChangePercent?.fmt})</span>
             </span>
           )
         })
       }
-    </div>
+      </div>
     </div>
   );
 };

@@ -1,15 +1,23 @@
-import React from 'react';
-import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import { useState } from 'react';
 import { BsSearch } from "react-icons/bs";
+import { useNavigate } from 'react-router-dom';
+import { useFetch } from '../hooks/useFetch';
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
 
-type Props = {
-    searchStringUpdated: (value: string) => void
-}
+const Search = () => {
+    const [searchString, setSearchString] = useState('');
+    const [error, setError] = useState(false);
+    const navigate = useNavigate();
+    const { data } = useFetch(`https://yfapi.net/v11/finance/quoteSummary/${searchString}?lang=en&region=US&modules=defaultKeyStatistics%2CassetProfile`)
 
-const Search = (props: Props) => {
-    const submitSearchString = (event: React.ChangeEvent<HTMLInputElement>) => props.searchStringUpdated(event.target.value);
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchString(event.target.value)
+        setError(false)
+    }
 
+    const handleSearch = () => data && data?.quoteSummary?.result ? navigate(`/stocks/:${searchString}`, { state: searchString}) : setError(true);
     return (
+        
         <Container>
             <Form
                 onSubmit={(event) => event.preventDefault()}
@@ -20,15 +28,18 @@ const Search = (props: Props) => {
                         <Form.Control
                             type="text"
                             placeholder="Search by Symbol..."
-                            onChange={submitSearchString}
+                            onChange={handleChange}
                         />
                     </Col>
                     <Col xs={1}>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" onClick={handleSearch}>
                             <BsSearch />
                         </Button>
                     </Col>
                 </Row>
+                {
+                    error && <div className='error-msg'>Couldn't find this symbol. Please enter again</div>
+                }
             </Form>
         </Container>
     )

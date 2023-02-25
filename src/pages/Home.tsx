@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import Cards from '../components/Cards';
+import { Suspense, lazy } from 'react';
 import Search from '../components/Search';
 
-const Home = () => {
-  const [searchString, setSearchString] = useState('');
-  const handleSearchStringUpdate = (searchString: string) => setSearchString(searchString);
+const Cards = lazy(() => import('../components/Cards'))
 
+const Home = () => {
   return (
     <>
-      <Search searchStringUpdated={handleSearchStringUpdate} />
-      <Cards searchString={searchString} />
+      <Search />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Cards />
+      </Suspense>
     </>
   );
 }

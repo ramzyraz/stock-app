@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import LineChart from '../components/Chart';
+import Loading from '../components/Loading';
 
 const Stocks = () => {
     const { state } = useLocation();
@@ -27,15 +28,7 @@ const Stocks = () => {
         <>
             {
                 !data ? (
-                    <div className="container">
-                        <div className="row">
-                            <div className="col">
-                                <div className="card rounded shadow-lg m-2 chart-true">
-                                    <p className="error-message" style={{ padding: "9px" }}>Loading Data...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Loading />
                 ) : (
                     <div className="stock-row">
                         <div className="stock-column-data">                            

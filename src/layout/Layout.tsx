@@ -1,11 +1,12 @@
-import { Suspense, ReactNode } from 'react';
+import { Suspense, ReactNode, lazy } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../components/Header';
-import Slider from '../components/Slider';
 
 type Props = {
   children: ReactNode;
 };
+
+const Slider = lazy(() => import('../components/Slider'))
 
 const Layout = ({ children }: Props) => {
   return (
