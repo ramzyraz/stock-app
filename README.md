@@ -1,4 +1,4 @@
-# stock-app
+# Stock Market Application
 An interactive stock market app using React that uses the [Finance API](https://www.financeapi.net/). 
 
 ## Technologies Used
