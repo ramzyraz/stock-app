@@ -6,5 +6,5 @@ An interactive stock market app using React that uses the [Finance API](https://
 This project uses the following technologies:
 * **React** for Frontend
 * **React Router** for Navigation between Pages
-* **Bootstrap** and *CSS* for the Design
+* **Bootstrap** and **CSS** for the Design
 * **Chart.js** for creating the charts
